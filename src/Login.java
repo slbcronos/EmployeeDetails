@@ -1,14 +1,24 @@
 /**
  *
- * @author slb_1
+ * @author slb_18
  */
+
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
+    
+    Connection conn = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
 
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        
+        conn = MysqlConnect.ConnectDB();
     }
 
     /**
@@ -36,6 +46,11 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Password");
 
         cmdLogin.setText("Login");
+        cmdLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLoginActionPerformed(evt);
+            }
+        });
 
         cmdCancelar.setText("Cancelar");
         cmdCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +116,26 @@ public class Login extends javax.swing.JFrame {
         // Boton Salir
         System.exit(1);
     }//GEN-LAST:event_cmdCancelarActionPerformed
+
+    private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
+        try {
+            String sql = "SELECT * FROM user WHERE username =? and password =?";
+            
+            pst= conn.prepareStatement(sql);
+            pst.setString(1, txtUsername.getText());
+            pst.setString(2, txtPassword.getText());
+            rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Username & Password is Correct");
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Username or Password is NOT Correct");
+            }
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_cmdLoginActionPerformed
 
     /**
      * @param args the command line arguments

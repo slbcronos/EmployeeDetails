@@ -11,7 +11,7 @@ public class MysqlConnect {
     
     public static Connection ConnectDB(){
         try {
-            Class.forName("com.jdbc.mysql.Driver"); //lee el driver de la conexion
+            Class.forName("com.mysql.jdbc.Driver"); //lee el driver de la conexión
             
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/empdb","root","");
             JOptionPane.showMessageDialog(null, "Conexion Exitosa");
