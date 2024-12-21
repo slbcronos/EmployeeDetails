@@ -1,13 +1,15 @@
+
 /**
  *
  * @author slb_18
  */
 
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-    
+
     Connection conn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -17,7 +19,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        
+
         conn = MysqlConnect.ConnectDB();
     }
 
@@ -44,6 +46,18 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Username");
 
         jLabel2.setText("Password");
+
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyTyped(evt);
+            }
+        });
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
+            }
+        });
 
         cmdLogin.setText("Login");
         cmdLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -120,22 +134,53 @@ public class Login extends javax.swing.JFrame {
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
         try {
             String sql = "SELECT * FROM user WHERE username =? and password =?";
-            
-            pst= conn.prepareStatement(sql);
+
+            pst = conn.prepareStatement(sql);
             pst.setString(1, txtUsername.getText());
             pst.setString(2, txtPassword.getText());
             rs = pst.executeQuery();
-            
+
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Username & Password is Correct");
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Username or Password is NOT Correct");
             }
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_cmdLoginActionPerformed
+
+    private void txtUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyTyped
+        // Captura la tecla ENTER y evita las demas teclas
+        char cTeclaPresionada = evt.getKeyChar();
+
+        //da click al cmd de aceptar al detectar la tecla enter
+        if (cTeclaPresionada == KeyEvent.VK_ENTER) {
+            //ejecuta el cmd Aceptar (como si diera click)
+            cmdLogin.doClick();
+        }
+
+        if (cTeclaPresionada == KeyEvent.VK_ESCAPE) {
+            //ejecuta el cmd Salir (como si diera click)
+            cmdCancelar.doClick();
+        }
+    }//GEN-LAST:event_txtUsernameKeyTyped
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+        // Captura la tecla ENTER y evita las demas teclas
+        char cTeclaPresionada = evt.getKeyChar();
+
+        //da click al cmd de aceptar al detectar la tecla enter
+        if (cTeclaPresionada == KeyEvent.VK_ENTER) {
+            //ejecuta el cmd Aceptar (como si diera click)
+            cmdLogin.doClick();
+        }
+        if (cTeclaPresionada == KeyEvent.VK_ESCAPE) {
+            //ejecuta el cmd Aceptar (como si diera click)
+            cmdCancelar.doClick();
+        }
+    }//GEN-LAST:event_txtPasswordKeyTyped
 
     /**
      * @param args the command line arguments
