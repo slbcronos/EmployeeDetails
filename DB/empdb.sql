@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-12-2024 a las 11:14:50
+-- Tiempo de generación: 22-12-2024 a las 09:35:04
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -22,6 +22,26 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `empdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
 USE `empdb`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `employeeinfo`
+--
+
+DROP TABLE IF EXISTS `employeeinfo`;
+CREATE TABLE `employeeinfo` (
+  `EmployeeID` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Gender` varchar(50) NOT NULL,
+  `Age` int(11) NOT NULL,
+  `BloodGroup` varchar(100) NOT NULL,
+  `ContacNo` bigint(50) NOT NULL,
+  `Qualification` varchar(255) NOT NULL,
+  `DOJ` date NOT NULL COMMENT 'Date of Joining',
+  `Address` varchar(255) NOT NULL,
+  `EmpImage` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -49,6 +69,12 @@ INSERT INTO `user` (`user`, `username`, `password`) VALUES
 --
 
 --
+-- Indices de la tabla `employeeinfo`
+--
+ALTER TABLE `employeeinfo`
+  ADD PRIMARY KEY (`EmployeeID`);
+
+--
 -- Indices de la tabla `user`
 --
 ALTER TABLE `user`
@@ -57,6 +83,12 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `employeeinfo`
+--
+ALTER TABLE `employeeinfo`
+  MODIFY `EmployeeID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
