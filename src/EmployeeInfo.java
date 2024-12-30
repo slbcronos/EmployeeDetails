@@ -175,8 +175,10 @@ public class EmployeeInfo extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("Image Path");
 
-        imagelabel.setBackground(new java.awt.Color(204, 204, 204));
+        imagelabel.setBackground(new java.awt.Color(255, 255, 255));
+        imagelabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagelabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        imagelabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jDesktopPane1.setLayer(imagelabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
